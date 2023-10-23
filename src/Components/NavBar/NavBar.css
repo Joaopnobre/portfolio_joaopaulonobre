@@ -101,8 +101,24 @@ li {
 }
 
 @media (orientation = portrait) {
+  .list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -100px;
+  }
 
   .hamburguer {
     display: none;
+  }
+  .email-btn{
+    display: none;
+  }
+  .copied-icon{
+    display: none;
+  }
+  .nome{
+    font-size: 24px;
+    margin-top: 30px;
   }
 }
