@@ -93,3 +93,16 @@ li {
 .email {
   display: none;
 }
+
+@media (orientation = landscape) {
+  .hamburguer{
+    display: none;
+  }
+}
+
+@media (orientation = portrait) {
+
+  .hamburguer {
+    display: none;
+  }
+}
