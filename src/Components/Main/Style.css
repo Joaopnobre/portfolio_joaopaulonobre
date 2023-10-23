@@ -1,0 +1,45 @@
+.mini-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  margin-top: 80px;
+  background-color:rgb(16, 194, 167);
+}
+
+.container {
+  width: 270px;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+h1 {
+  padding-top: 0.1px;
+}
+
+h2 {
+  padding-bottom: 3px;
+  height: 10px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 5rem;
+  text-align: center;
+}
+
+
+.social-icon {
+  height: 39px;
+  padding-top: 6px;
+  width: 45px;
+  cursor: pointer;
+}
+
+.social-icon:hover{
+  background-color: white;
+  width: 45px;
+}

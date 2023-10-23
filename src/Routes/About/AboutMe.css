@@ -1,0 +1,49 @@
+ @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Oswald:wght@300&family=Roboto+Condensed&family=Roboto:ital,wght@0,100;0,300;0,400;1,300&display=swap");
+
+.about-title{
+    font-family: "Lato", sans-serif;
+    margin-top: 50px;
+}
+
+.aboutme{
+    margin-top: 50px;
+}
+
+h3{
+    font-family: "Lato", sans-serif;
+}
+
+.curriculum{
+    display: flex;
+justify-content: center;
+}
+
+.line3{
+    margin-top: 65px;
+    width: 80%;
+    font-family: "Lato", sans-serif;
+} 
+
+.before{
+    font-family: "Lato", sans-serif;
+    margin-top: 50px;
+}
+
+.portfolio-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+}
+
+.portfolio-left {
+    flex: 1; 
+    text-align: center;
+}
+
+
+.portfolio-right {
+    flex: 1; 
+    text-align: center;
+}
