@@ -1,0 +1,39 @@
+h2{
+    margin-top: 80px;
+}
+.language-table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.language-table table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.language-table th,
+.language-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.language-table th {
+  background-color: #f2f2f2;
+}
+
+.language-table th:first-child,
+.language-table td:first-child {
+  background-color: #e6e6e6;
+  font-weight: bold;
+}
+
+.language-table th:first-child {
+  text-align: left;
+}
+
+.language-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
