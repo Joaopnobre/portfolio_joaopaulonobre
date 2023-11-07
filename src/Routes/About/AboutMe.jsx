@@ -7,20 +7,21 @@ function AboutMe() {
       <h2 className="about-title">About Me</h2>
       <p className="aboutme">
         {" "}
-        I have worked in various sectors of the market that have allowed me to
+        I have worked in various sectors of the market, which have allowed me to
         grow significantly. Since I arrived in Portugal and started to
-        understand and study programming, I have begun to develop a passion for
-        the field and what it offers as a lifestyle. Guided by several
-        professionals in the field working with HTML, CSS, Javascript, React,
-        Typescript and Backend with differents libraries. I chose to pursue the
-        Front end area at the beginning of my career out of pure identification,
-        but as time goes by I want to specialize to become Full Stack Developer.
-        I developed some projects as a freelancer and now I am looking for a
-        company to develop me and help our projects. I had the opportunity to
-        live in England where I developed some characteristics of my current
-        personality in addition to my English and even Spanish. I like to be in
-        control of what I’m doing, so I dedicate myself a lot to learn. Always
-        looking to learn and evolve. That´s why I open to learn any framework.{" "}
+        understand and study programming, I have developed a passion for the
+        field and what it offers as a lifestyle. Guided by several professionals
+        in the field working with HTML, CSS, Javascript, React, Typescript, and
+        various backend libraries. I chose to pursue the front-end area at the
+        beginning of my career out of pure passion, but as time goes by, I want
+        to specialize and become a Full Stack Developer. I developed some
+        projects as a freelancer, and now I am looking for a company to further
+        develop my skills and collaborate on projects. I had the opportunity to
+        live in England, where I developed certain aspects of my current
+        personality, in addition to improving my English and even Spanish. I
+        like to have control over what I'm doing, so I dedicate a lot of time to
+        learning. I'm always eager to learn and evolve, which is why I'm open to
+        learning any framework and if I need to, move to another city.{" "}
       </p>{" "}
       <h2 className="before">Before</h2>
       {/* <div className="curriculum">
