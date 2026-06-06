@@ -1,13 +1,773 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/new-porfolio/src//assets/icon-portfolio.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfólio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>João Paulo Medeiros — Cybersecurity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1F7A4C;
+    --green-dark: #155c38;
+    --green-mid: #2a9460;
+    --green-light: #e8f5ee;
+    --green-xlight: #f2faf5;
+    --offwhite: #F7F5F0;
+    --offwhite2: #EFEDE7;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --border: rgba(31,122,76,0.15);
+    --border2: rgba(31,122,76,0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--offwhite);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--offwhite2); }
+  ::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 3px; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--green);
+    padding: 0 40px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.04em;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 22px;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 300;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: #fff; }
+
+  /* ── LANGUAGE SWITCHER ── */
+  .lang-switcher {
+    display: flex;
+    gap: 4px;
+    background: rgba(0,0,0,0.2);
+    padding: 4px;
+    border-radius: 8px;
+  }
+
+  .lang-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+
+  .lang-btn.active {
+    background: #fff;
+    color: var(--green);
+    font-weight: 500;
+  }
+
+  .lang-btn:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.1); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--green);
+    padding: 64px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 20px; right: 80px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.85);
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #7dffb8;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-size: 44px;
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 span { font-weight: 500; }
+
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    max-width: 480px;
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn-white {
+    background: #fff;
+    color: var(--green);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-white:hover { opacity: 0.9; }
+
+  .btn-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+
+  /* ── WAVE DIVIDER ── */
+  .wave {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background: var(--green);
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 0 100%);
+  }
+
+  /* ── MAIN CONTENT ── */
+  main { max-width: 760px; margin: 0 auto; padding: 0 40px 60px; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 20px;
+  }
+
+  .section-dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--green);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border2);
+  }
+
+  /* ── SKILLS GRID ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .skill-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .skill-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+  }
+
+  .skill-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .skill-card h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .skill-card p {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── PROJECT CARD ── */
+  .project-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .project-header {
+    background: var(--green-xlight);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .project-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+  }
+
+  .project-academy {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--green-mid);
+  }
+
+  .project-badge {
+    background: var(--green);
+    color: #fff;
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-left: 12px;
+  }
+
+  .project-body { padding: 20px 24px; }
+
+  .project-body p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .tag {
+    font-size: 11px;
+    background: var(--green-light);
+    color: var(--green-dark);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .about-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+  }
+
+  .about-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .about-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── CONTACT ── */
+  .contact-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13px;
+    transition: border-color 0.2s;
+  }
+
+  .contact-item:hover { border-color: var(--green); color: var(--green); }
+
+  .contact-icon {
+    width: 18px; height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .footer-links { display: flex; gap: 16px; }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: #fff; }
+
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .hero-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 3px solid rgba(255,255,255,0.25);
+    flex-shrink: 0;
+  }
+
+  .hero-text { flex: 1; }
+
+  @media (max-width: 600px) {
+    .hero-inner { flex-direction: column; gap: 20px; text-align: center; }
+    .hero-btns { justify-content: center; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 44px 20px 60px; }
+    .hero h1 { font-size: 30px; }
+    main { padding: 0 20px 40px; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: 1fr; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">jpm // cybersecurity</span>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#skills" data-i18n="nav.skills">Skills</a>
+      <a href="#project" data-i18n="nav.project">Project</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-tag" data-i18n="hero.tag">Junior Cybersecurity Analyst</div>
+  <h1><span>João Paulo</span> Medeiros</h1>
+  <p class="hero-sub" data-i18n="hero.sub">
+    Focused on IAM and Blue Team. Hands-on training in networking, Linux, incident management, and vulnerability analysis.
+  </p>
+  <div class="hero-btns">
+    <a href="#project" class="btn-white" data-i18n="hero.btn1">View Project</a>
+    <a href="#contact" class="btn-outline" data-i18n="hero.btn2">Get in Touch</a>
+  </div>
+</section>
+
+<svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" style="display:block;background:var(--offwhite);margin-top:-1px">
+  <path d="M0,0 L1440,0 L1440,10 Q720,50 0,10 Z" fill="#1F7A4C"/>
+</svg>
+
+<!-- MAIN -->
+<main>
+
+  <!-- SKILLS -->
+  <div class="section-header" id="skills">
+    <div class="section-dot"></div>
+    <h2 data-i18n="section.skills">Technical Skills</h2>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-label">01</div>
+      <h3 data-i18n="skill.net.title">Networking</h3>
+      <p>TCP/IP · DNS · HTTP/S · NAT · Firewall · ACL · IDS/IPS</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">02</div>
+      <h3>Linux</h3>
+      <p data-i18n="skill.linux.desc">Ubuntu · Kali · Users · Permissions · Services</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">03</div>
+      <h3 data-i18n="skill.sec.title">Security</h3>
+      <p data-i18n="skill.sec.desc">SIEM (basic) · Blue Team · Nmap · Incident management</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">04</div>
+      <h3>IAM</h3>
+      <p data-i18n="skill.iam.desc">Identity & access management · Access control · Security policies</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-label">05</div>
+      <h3 data-i18n="skill.lang.title">Languages</h3>
+      <p data-i18n="skill.lang.desc">Portuguese (Native) · Spanish (C1) · English (C1)</p>
+    </div>
+  </div>
+
+  <!-- PROJECT -->
+  <div class="section-header" id="project">
+    <div class="section-dot"></div>
+    <h2 data-i18n="section.project">Final Project</h2>
+  </div>
+
+  <div class="project-card">
+    <div class="project-header">
+      <div>
+        <div class="project-title" data-i18n="project.title">Debian Server Audit & Hardening</div>
+        <div class="project-academy">4Geeks Academy · Barcelona · 2026</div>
+      </div>
+      <span class="project-badge" data-i18n="project.badge">Capstone</span>
+    </div>
+    <div class="project-body">
+      <p data-i18n="project.desc">
+        Performed reconnaissance and vulnerability assessment using Nmap and Gobuster on a Debian server environment. Identified and remediated security issues in FTP, SSH, and WordPress services, applying basic hardening techniques and documenting all findings based on ISO 27001 concepts.
+      </p>
+      <div class="tags">
+        <span class="tag">Nmap</span>
+        <span class="tag">Gobuster</span>
+        <span class="tag">Kali Linux</span>
+        <span class="tag">Debian</span>
+        <span class="tag">ISO 27001</span>
+        <span class="tag">Hardening</span>
+        <span class="tag">SSH</span>
+        <span class="tag">FTP</span>
+        <span class="tag">WordPress</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section-header" id="about">
+    <div class="section-dot"></div>
+    <h2 data-i18n="section.about">About</h2>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="about-card-label" data-i18n="about.bg.label">Background</div>
+      <p data-i18n="about.bg.text">Lived in Brazil, England, Portugal and Spain. International profile with strong adaptability and cross-cultural communication skills.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-label" data-i18n="about.career.label">Career shift</div>
+      <p data-i18n="about.career.text">Coming from operations management and Full Stack development, now focused on cybersecurity with certification from 4Geeks Academy.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-label" data-i18n="about.cert.label">Certifications</div>
+      <p data-i18n="about.cert.text">Cybersecurity Bootcamp — 4Geeks Academy (2026) · Full Stack Development — EDIT, Portugal (2023)</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-label" data-i18n="about.focus.label">Current focus</div>
+      <p data-i18n="about.focus.text">Seeking entry-level roles in SOC Analysis or IAM. Available for relocation within Spain.</p>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section-header" id="contact">
+    <div class="section-dot"></div>
+    <h2 data-i18n="section.contact">Contact</h2>
+  </div>
+
+  <div class="contact-row">
+    <a href="mailto:joaopnobre@gmail.com" class="contact-item">
+      <svg class="contact-icon" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      joaopnobre@gmail.com
+    </a>
+    <a href="https://github.com/Joaopnobre" target="_blank" class="contact-item">
+      <svg class="contact-icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/joaopaulonobre/" target="_blank" class="contact-item">
+      <svg class="contact-icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="assets/CV_JoaoPaulo_Medeiros.pdf" download class="contact-item">
+      <svg class="contact-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span data-i18n="contact.cv">Download CV</span>
+    </a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>João Paulo Medeiros · Barcelona, Spain</p>
+  <div class="footer-links">
+    <a href="mailto:joaopnobre@gmail.com">joaopnobre@gmail.com</a>
+    <a href="tel:+34620981902">+34 620 981 902</a>
+  </div>
+</footer>
+
+<script>
+const i18n = {
+  en: {
+    "nav.skills": "Skills",
+    "nav.project": "Project",
+    "nav.about": "About",
+    "nav.contact": "Contact",
+    "hero.tag": "Junior Cybersecurity Analyst",
+    "hero.sub": "Focused on IAM and Blue Team. Hands-on training in networking, Linux, incident management, and vulnerability analysis.",
+    "hero.btn1": "View Project",
+    "hero.btn2": "Get in Touch",
+    "section.skills": "Technical Skills",
+    "section.project": "Final Project",
+    "section.about": "About",
+    "section.contact": "Contact",
+    "skill.net.title": "Networking",
+    "skill.linux.desc": "Ubuntu · Kali · Users · Permissions · Services",
+    "skill.sec.title": "Security",
+    "skill.sec.desc": "SIEM (basic) · Blue Team · Nmap · Incident management",
+    "skill.iam.desc": "Identity & access management · Access control · Security policies",
+    "skill.dev.title": "Development",
+    "skill.lang.title": "Languages",
+    "skill.lang.desc": "Portuguese (Native) · Spanish (C1) · English (C1)",
+    "project.title": "Debian Server Audit & Hardening",
+    "project.badge": "Capstone",
+    "project.desc": "Performed reconnaissance and vulnerability assessment using Nmap and Gobuster on a Debian server environment. Identified and remediated security issues in FTP, SSH, and WordPress services, applying basic hardening techniques and documenting all findings based on ISO 27001 concepts.",
+    "about.bg.label": "Background",
+    "about.bg.text": "Lived in Brazil, England, Portugal and Spain. International profile with strong adaptability and cross-cultural communication skills.",
+    "about.career.label": "Career shift",
+    "about.career.text": "After 5 years running my own company and experience in content moderation and administration, I made a deliberate move into cybersecurity. Certified by 4Geeks Academy with hands-on training in networking, Linux, incident management and vulnerability analysis — now looking for my first role in the field.",
+    "about.cert.label": "Certifications",
+    "about.cert.text": "Cybersecurity Bootcamp — 4Geeks Academy (2026) · Full Stack Development — EDIT, Portugal (2023)",
+    "about.focus.label": "Current focus",
+    "about.focus.text": "Looking for a junior entry-level position in SOC Analysis or IAM. Available for relocation within Spain.",
+    "contact.cv": "Download CV"
+  },
+  es: {
+    "nav.skills": "Habilidades",
+    "nav.project": "Proyecto",
+    "nav.about": "Sobre mí",
+    "nav.contact": "Contacto",
+    "hero.tag": "Analista Junior de Ciberseguridad",
+    "hero.sub": "Enfocado en IAM y Blue Team. Formación práctica en redes, Linux, gestión de incidentes y análisis de vulnerabilidades.",
+    "hero.btn1": "Ver Proyecto",
+    "hero.btn2": "Contactar",
+    "section.skills": "Habilidades Técnicas",
+    "section.project": "Proyecto Final",
+    "section.about": "Sobre mí",
+    "section.contact": "Contacto",
+    "skill.net.title": "Redes",
+    "skill.linux.desc": "Ubuntu · Kali · Usuarios · Permisos · Servicios",
+    "skill.sec.title": "Seguridad",
+    "skill.sec.desc": "SIEM (básico) · Blue Team · Nmap · Gestión de incidentes",
+    "skill.iam.desc": "Gestión de identidades y accesos · Control de acceso · Políticas de seguridad",
+    "skill.dev.title": "Desarrollo",
+    "skill.lang.title": "Idiomas",
+    "skill.lang.desc": "Portugués (Nativo) · Español (C1) · Inglés (C1)",
+    "project.title": "Auditoría y Hardening de Servidor Debian",
+    "project.badge": "Proyecto Final",
+    "project.desc": "Realicé reconocimiento y evaluación de vulnerabilidades con Nmap y Gobuster en un entorno de servidor Debian. Identifiqué y remedié problemas de seguridad en servicios FTP, SSH y WordPress, aplicando técnicas de hardening y documentando los hallazgos con base en conceptos ISO 27001.",
+    "about.bg.label": "Trayectoria",
+    "about.bg.text": "Vivió en Brasil, Inglaterra, Portugal y España. Perfil internacional con alta capacidad de adaptación y comunicación multicultural.",
+    "about.career.label": "Cambio de carrera",
+    "about.career.text": "Tras 5 años gestionando mi propia empresa y experiencia en moderación de contenido y administración, decidí dar el paso a la ciberseguridad. Certificado por 4Geeks Academy con formación práctica en redes, Linux, gestión de incidentes y análisis de vulnerabilidades — en búsqueda de mi primera oportunidad en el sector.",
+    "about.cert.label": "Formación",
+    "about.cert.text": "Bootcamp de Ciberseguridad — 4Geeks Academy (2026) · Full Stack Development — EDIT, Portugal (2023)",
+    "about.focus.label": "Búsqueda actual",
+    "about.focus.text": "En búsqueda de una posición junior de entrada en SOC Analyst o IAM. Disponibilidad para reubicación dentro de España.",
+    "contact.cv": "Descargar CV"
+  },
+  pt: {
+    "nav.skills": "Competências",
+    "nav.project": "Projeto",
+    "nav.about": "Sobre",
+    "nav.contact": "Contacto",
+    "hero.tag": "Analista Júnior de Cibersegurança",
+    "hero.sub": "Foco em IAM e Blue Team. Formação prática em redes, Linux, gestão de incidentes e análise de vulnerabilidades.",
+    "hero.btn1": "Ver Projeto",
+    "hero.btn2": "Entrar em Contacto",
+    "section.skills": "Competências Técnicas",
+    "section.project": "Projeto Final",
+    "section.about": "Sobre",
+    "section.contact": "Contacto",
+    "skill.net.title": "Redes",
+    "skill.linux.desc": "Ubuntu · Kali · Utilizadores · Permissões · Serviços",
+    "skill.sec.title": "Segurança",
+    "skill.sec.desc": "SIEM (básico) · Blue Team · Nmap · Gestão de incidentes",
+    "skill.iam.desc": "Gestão de identidades e acessos · Controlo de acesso · Políticas de segurança",
+    "skill.dev.title": "Desenvolvimento",
+    "skill.lang.title": "Idiomas",
+    "skill.lang.desc": "Português (Nativo) · Espanhol (C1) · Inglês (C1)",
+    "project.title": "Auditoria e Hardening de Servidor Debian",
+    "project.badge": "Projeto Final",
+    "project.desc": "Realização de reconhecimento e avaliação de vulnerabilidades com Nmap e Gobuster num ambiente de servidor Debian. Identificação e remediação de problemas de segurança nos serviços FTP, SSH e WordPress, aplicando técnicas de hardening e documentando os resultados com base em conceitos ISO 27001.",
+    "about.bg.label": "Percurso",
+    "about.bg.text": "Viveu no Brasil, Inglaterra, Portugal e Espanha. Perfil internacional com forte capacidade de adaptação e comunicação multicultural.",
+    "about.career.label": "Mudança de carreira",
+    "about.career.text": "Após 5 anos a gerir a minha própria empresa e experiência em moderação de conteúdo e administração, tomei a decisão de mudar para a cibersegurança. Certificado pela 4Geeks Academy com formação prática em redes, Linux, gestão de incidentes e análise de vulnerabilidades — à procura da minha primeira oportunidade na área.",
+    "about.cert.label": "Formação",
+    "about.cert.text": "Bootcamp de Cibersegurança — 4Geeks Academy (2026) · Full Stack Development — EDIT, Portugal (2023)",
+    "about.focus.label": "Foco atual",
+    "about.focus.text": "À procura de uma posição júnior de entrada em SOC Analysis ou IAM. Disponível para recolocação em Espanha.",
+    "contact.cv": "Descarregar CV"
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+}
+</script>
+</body>
 </html>
