@@ -624,9 +624,9 @@
   </div>
 
   <div class="contact-row">
-    <a href="mailto:joaopnobre@gmail.com" class="contact-item">
+    <a href="#" class="contact-item" onclick="copyEmail(event)">
       <svg class="contact-icon" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-      joaopnobre@gmail.com
+      <span id="email-label">joaopnobre@gmail.com</span>
     </a>
     <a href="https://github.com/Joaopnobre" target="_blank" class="contact-item">
       <svg class="contact-icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
@@ -661,7 +661,7 @@ const i18n = {
     "nav.about": "About",
     "nav.contact": "Contact",
     "hero.tag": "Junior Cybersecurity Analyst",
-    "hero.sub": "Focused on IAM and Blue Team. Hands-on training in networking, Linux, incident management, and vulnerability analysis.",
+    "hero.sub": "Junior cybersecurity analyst looking for a first opportunity in the field. Hands-on training in networking, Linux, incident management and vulnerability analysis.",
     "hero.btn1": "View Project",
     "hero.btn2": "Get in Touch",
     "section.skills": "Technical Skills",
@@ -695,7 +695,7 @@ const i18n = {
     "nav.about": "Sobre mí",
     "nav.contact": "Contacto",
     "hero.tag": "Analista Junior de Ciberseguridad",
-    "hero.sub": "Enfocado en IAM y Blue Team. Formación práctica en redes, Linux, gestión de incidentes y análisis de vulnerabilidades.",
+    "hero.sub": "Analista junior de ciberseguridad en búsqueda de su primera oportunidad en el sector. Formación práctica en redes, Linux, gestión de incidentes y análisis de vulnerabilidades.",
     "hero.btn1": "Ver Proyecto",
     "hero.btn2": "Contactar",
     "section.skills": "Habilidades Técnicas",
@@ -729,7 +729,7 @@ const i18n = {
     "nav.about": "Sobre",
     "nav.contact": "Contacto",
     "hero.tag": "Analista Júnior de Cibersegurança",
-    "hero.sub": "Foco em IAM e Blue Team. Formação prática em redes, Linux, gestão de incidentes e análise de vulnerabilidades.",
+    "hero.sub": "Analista júnior de cibersegurança à procura da primeira oportunidade na área. Formação prática em redes, Linux, gestão de incidentes e análise de vulnerabilidades.",
     "hero.btn1": "Ver Projeto",
     "hero.btn2": "Entrar em Contacto",
     "section.skills": "Competências Técnicas",
@@ -759,6 +759,15 @@ const i18n = {
   }
 };
 
+function copyEmail(e) {
+  e.preventDefault();
+  navigator.clipboard.writeText('joaopnobre@gmail.com').then(() => {
+    const label = document.getElementById('email-label');
+    label.textContent = '✓ Copied!';
+    setTimeout(() => { label.textContent = 'joaopnobre@gmail.com'; }, 2000);
+  });
+}
+
 function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
@@ -769,5 +778,7 @@ function setLang(lang) {
   });
 }
 </script>
+</body>
+</html>
 </body>
 </html>
